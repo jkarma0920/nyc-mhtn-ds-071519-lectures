@@ -30,7 +30,7 @@ def preprocess(data):
         raw_tokens = nltk.regexp_tokenize(doc, pattern)
         tokens = [i.lower() for i in raw_tokens]
         stop_words = set(stopwords.words('english'))
-        listed = [w for w in tokens if not w in stop_words]
+        listed = [w for w in tokens if not w in stop_words]x
         lemmatized = [wordnet_lemmatizer.lemmatize(word, pos="v") for word in listed]
         lemmatized = list(filter(lambda w: w != 'lb', lemmatized))
         words = list(filter(lambda w: w in english, lemmatized))
@@ -38,7 +38,7 @@ def preprocess(data):
 
     lemmatized = [lemmadata(post) for post in data]
 
-    # picked tfidf vectorizer
+    # pickled tfidf vectorizer (remember: tf-idf training and test data SEPARATELY)
     tfidf = pickle.load(open("dash_package/pickles/tfidf.pkl", "rb"))
 
     transformed = tfidf.transform(lemmatized)
